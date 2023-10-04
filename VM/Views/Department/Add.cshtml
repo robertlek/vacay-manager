@@ -1,0 +1,31 @@
+﻿@model Department
+
+@{
+    ViewData["Title"] = "Add Department";
+}
+
+<div class="mt-4 mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h4>Add Department</h4>
+        </div>
+
+        <div>
+            <a asp-action="Index" class="btn btn-primary shadow-none">
+                <span>Back</span>
+            </a>
+        </div>
+    </div>
+
+    <form method="post">
+        <label asp-for="Name">Department Name</label>
+        <input asp-for="Name" type="text" class="form-control shadow-none mb-3" />
+
+        <label asp-for="Overlaps">Maximum Overlaps</label>
+        <input asp-for="Overlaps" type="text" class="form-control shadow-none mb-3" />
+
+        <button type="submit" class="btn btn-primary shadow-none">
+            <span>Add Department</span>
+        </button>
+    </form>
+</div>

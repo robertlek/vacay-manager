@@ -14,6 +14,28 @@ public class DepartmentController : Controller
     }
 
     [HttpGet]
+    public IActionResult Add()
+    {
+        Department department = new();
+        return View(department);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Add(Department department)
+    {
+        if (ModelState.IsValid)
+        {
+            _context.Add(department);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        return View(department);
+    }
+
+    [HttpGet]
     public IActionResult Index()
     {
         IEnumerable<Department> departments = _context.Departments;
