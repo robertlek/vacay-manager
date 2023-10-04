@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Department>
+
+@{
+    ViewData["Title"] = "Departments";
+}
+
+<div class="mt-4 mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h4>Departments</h4>
+        </div>
+
+        <div>
+            <a class="btn btn-primary shadow-none">
+                <span>Add Department</span>
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-primary table-bordered">
+        <thead class="text-center">
+            <tr>
+                <th>Department Name</th>
+                <th>Maximum Overlaps</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody class="text-center">
+            @foreach (var department in Model)
+            {
+                <tr>
+                    <td>@department.Name</td>
+                    <td>@department.Overlaps</td>
+                    <td>
+                        <a class="btn btn-warning shadow-none mx-1">
+                            <span>Update</span>
+                        </a>
+                        <a class="btn btn-danger shadow-none mx-1">
+                            <span>Delete</span>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
