@@ -7,11 +7,14 @@ namespace VM.Storage.DataAccess;
 
 public class Context : IdentityDbContext<IdentityUser>
 {
-	public Context(DbContextOptions<Context> options) : base(options)
+	public DbSet<Department> Departments { get; set; }
+    public DbSet<Employee> Employees { get; set; }
+    public DbSet<Vacation> Vacations { get; set; }
+
+    public Context(DbContextOptions<Context> options) : base(options)
 	{
 	}
 
-	public DbSet<Department> Departments { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
