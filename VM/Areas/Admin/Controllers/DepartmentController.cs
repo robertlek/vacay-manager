@@ -2,8 +2,9 @@
 using VM.Storage.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 
-namespace VM.Controllers;
+namespace VM.Areas.Admin.Controllers;
 
+[Area("Admin")]
 public class DepartmentController : Controller
 {
     private readonly Context _context;
