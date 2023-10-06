@@ -8,13 +8,17 @@
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/flatly-bootstrap.min.css" />
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/VM.styles.css" asp-append-version="true" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     </head>
 
     <body>
         <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary shadow mb-3">
                 <div class="container-fluid">
-                    <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">VM</a>
+                    <a class="navbar-brand" id="app-logo" asp-area="Public" asp-controller="Home" asp-action="Index">
+                        <i class="bi bi-calendar3 small mx-2"></i>
+                        <span>Vacay Manager</span>
+                    </a>
                     <button class="navbar-toggler shadow-none" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                         type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -23,22 +27,26 @@
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="Public" asp-controller="Home" asp-action="Index">
+                                    <i class="bi bi-house-fill mx-1"></i>
                                     <span>Home</span>
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#" role="button"
                                     aria-haspopup="true" aria-expanded="false">
+                                    <i class="bi bi-gear-fill mx-1"></i>
                                     <span>Admin</span>
                                 </a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" asp-area="Admin" asp-controller="Department" asp-action="Index">
+                                        <i class="bi bi-building-fill mx-1"></i>
                                         <span>Departments</span>
                                     </a>
                                 </div>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="Public" asp-controller="Vacation" asp-action="Index">
+                                    <i class="bi bi-building-fill mx-1"></i>
                                     <span>Departments</span>
                                 </a>
                             </li>
@@ -56,9 +64,14 @@
             </main>
         </div>
 
-        <footer class="bg-primary border-top footer">
+        <footer class="bg-primary footer shadow">
             <div class="container text-center text-white">
-                <span>&copy; 2023 - Vacay Manager</span>
+                <i class="bi bi-c-circle mx-1"></i>
+                <span>2023 - Vacay Manager - </span>
+
+                <a href="https://github.com/robertlek">
+                    <i class="bi bi-github text-white mx-1"></i>
+                </a>
             </div>
         </footer>
 
