@@ -1,8 +1,10 @@
 using VM.Library;
 using VM.Storage.DataAccess;
+using VM.Storage.Repository;
 using VM.Storage.Initializer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using VM.Storage.Repository.IRepository;
 using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,8 +17,9 @@ builder.Services.AddDbContext<Context>(options => options.UseSqlServer(
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
     .AddEntityFrameworkStores<Context>();
 builder.Services.AddRazorPages();
-builder.Services.AddSingleton<IEmailSender, EmailSender>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
 var app = builder.Build();
 
