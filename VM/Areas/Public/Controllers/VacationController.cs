@@ -1,7 +1,7 @@
 ﻿using VM.Environment;
-using VM.Storage.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using VM.Storage.Repository.IRepository;
 
 namespace VM.Areas.Public.Controllers;
 
@@ -9,16 +9,16 @@ namespace VM.Areas.Public.Controllers;
 [Authorize(Roles = Roles.Admin + "," + Roles.Employee)]
 public class VacationController : Controller
 {
-    private readonly Context _context;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public VacationController(Context context)
+    public VacationController(IUnitOfWork unitOfWork)
     {
-        _context = context;
+        _unitOfWork = unitOfWork;
     }
 
     public IActionResult Index()
     {
-        var departments = _context.Departments.OrderBy(department => department.Name);
+        var departments = _unitOfWork.Department.GetAll().OrderBy(department => department.Name);
         return View(departments);
     }
 }

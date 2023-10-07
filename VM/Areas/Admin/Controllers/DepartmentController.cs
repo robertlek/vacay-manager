@@ -1,8 +1,8 @@
 ﻿using VM.Models;
-using VM.Storage.DataAccess;
+using VM.Environment;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using VM.Environment;
+using VM.Storage.Repository.IRepository;
 
 namespace VM.Areas.Admin.Controllers;
 
@@ -10,11 +10,11 @@ namespace VM.Areas.Admin.Controllers;
 [Authorize(Roles = Roles.Admin)]
 public class DepartmentController : Controller
 {
-    private readonly Context _context;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public DepartmentController(Context context)
+    public DepartmentController(IUnitOfWork unitOfWork)
     {
-        _context = context;
+        _unitOfWork = unitOfWork;
     }
 
     [HttpGet]
@@ -30,8 +30,8 @@ public class DepartmentController : Controller
     {
         if (ModelState.IsValid)
         {
-            _context.Add(department);
-            _context.SaveChanges();
+            _unitOfWork.Department.Add(department);
+            _unitOfWork.Save();
 
             return RedirectToAction("Index");
         }
@@ -47,7 +47,7 @@ public class DepartmentController : Controller
             return NotFound();
         }
 
-        Department department = _context.Departments.First(department => department.Id == id);
+        var department = _unitOfWork.Department.Get(department => department.Id == id);
         return View(department);
     }
 
@@ -56,8 +56,8 @@ public class DepartmentController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult DeleteConfirmation(Department department)
     {
-        _context.Departments.Remove(department);
-        _context.SaveChanges();
+        _unitOfWork.Department.Remove(department);
+        _unitOfWork.Save();
 
         return RedirectToAction("Index");
     }
@@ -65,7 +65,7 @@ public class DepartmentController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        IEnumerable<Department> departments = _context.Departments.OrderBy(department => department.Name);
+        IEnumerable<Department> departments = _unitOfWork.Department.GetAll().OrderBy(department => department.Name);
         return View(departments);
     }
 
@@ -77,7 +77,7 @@ public class DepartmentController : Controller
             return NotFound();
         }
 
-        Department department = _context.Departments.First(department => department.Id == id);
+        var department = _unitOfWork.Department.Get(department => department.Id == id);
         return View(department);
     }
 
@@ -87,8 +87,8 @@ public class DepartmentController : Controller
     {
         if (ModelState.IsValid)
         {
-            _context.Update(department);
-            _context.SaveChanges();
+            _unitOfWork.Department.Update(department);
+            _unitOfWork.Save();
 
             return RedirectToAction("Index");
         }

@@ -10,7 +10,11 @@ public class UnitOfWork : IUnitOfWork
     public UnitOfWork(Context context)
     {
         _context = context;
+
+        Department = new DepartmentRepository(_context);
     }
+
+    public IDepartmentRepository Department { get; private set; }
 
     public void Save()
     {

@@ -2,5 +2,7 @@
 
 public interface IUnitOfWork
 {
+    IDepartmentRepository Department { get; }
+
     void Save();
 }
