@@ -1,10 +1,13 @@
 ﻿using VM.Models;
 using VM.Storage.DataAccess;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using VM.Environment;
 
 namespace VM.Areas.Admin.Controllers;
 
 [Area("Admin")]
+[Authorize(Roles = Roles.Admin)]
 public class DepartmentController : Controller
 {
     private readonly Context _context;
@@ -62,7 +65,7 @@ public class DepartmentController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        IEnumerable<Department> departments = _context.Departments;
+        IEnumerable<Department> departments = _context.Departments.OrderBy(department => department.Name);
         return View(departments);
     }
 
