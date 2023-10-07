@@ -12,9 +12,11 @@ public class UnitOfWork : IUnitOfWork
         _context = context;
 
         Department = new DepartmentRepository(_context);
+        Employee = new EmployeeRepository(_context);
     }
 
     public IDepartmentRepository Department { get; private set; }
+    public IEmployeeRepository Employee { get; private set; }
 
     public void Save()
     {
