@@ -21,7 +21,7 @@ public class Repository<T> : IRepository<T> where T : class
         _db.Add(entity);
     }
 
-    public T? Get(Expression<Func<T, bool>> filter, string? properties = null)
+    public T Get(Expression<Func<T, bool>> filter, string? properties = null)
     {
         IQueryable<T> query = _db.Where(filter);
 
@@ -33,7 +33,7 @@ public class Repository<T> : IRepository<T> where T : class
             }
         }
 
-        return query.FirstOrDefault();
+        return query.First();
     }
 
     public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null, string? properties = null)
@@ -54,6 +54,21 @@ public class Repository<T> : IRepository<T> where T : class
         }
 
         return query.ToList();
+    }
+
+    public T? GetFirstOrDefault(Expression<Func<T, bool>> filter, string? properties = null)
+    {
+        IQueryable<T> query = _db.Where(filter);
+
+        if (properties is not null)
+        {
+            foreach (var property in properties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(property);
+            }
+        }
+
+        return query.FirstOrDefault();
     }
 
     public void Remove(T entity)

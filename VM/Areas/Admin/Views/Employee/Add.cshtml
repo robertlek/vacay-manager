@@ -1,0 +1,79 @@
+﻿@model EmployeeUpsertViewModel
+
+@{
+    ViewData["Title"] = "New Employee";
+}
+
+<div class="mt-4 mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>
+            <i class="bi bi-people-fill mx-1"></i>
+            <span>New Employee</span>
+        </h4>
+
+        <a asp-action="Index" class="btn btn-primary shadow-none">
+            <i class="bi bi-fast-forward-circle-fill mx-1"></i>
+            <span>Back</span>
+        </a>
+    </div>
+
+    <form method="post">
+        <div class="row">
+            <div class="col-6 mb-3">
+                <label asp-for="Employee.FirstName" class="mb-1">First Name</label>
+                <input asp-for="Employee.FirstName" type="text" class="form-control shadow-none" />
+                <span asp-validation-for="Employee.FirstName" class="text-danger"></span>
+            </div>
+            <div class="col-6 mb-3">
+                <label asp-for="Employee.LastName" class="mb-1">Last Name</label>
+                <input asp-for="Employee.LastName" type="text" class="form-control shadow-none" />
+                <span asp-validation-for="Employee.LastName" class="text-danger"></span>
+            </div>
+            <div class="col-6 mb-3">
+                <label asp-for="User.Email" class="mb-1">Email Address</label>
+                <input asp-for="User.Email" type="text" class="form-control shadow-none" />
+                <span asp-validation-for="User.Email" class="text-danger"></span>
+            </div>
+            <div class="col-6 mb-3">
+                <label asp-for="Role" class="mb-1">Role</label>
+                <select asp-for="Role" asp-items="@Model.Roles" class="form-select shadow-none">
+                    <option disabled selected>Select Role</option>
+                </select>
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+            <div class="col-6 mb-3">
+                <label asp-for="User.PhoneNumber" class="mb-1">Phone Number</label>
+                <input asp-for="User.PhoneNumber" type="text" class="form-control shadow-none" />
+                <span asp-validation-for="User.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="col-6 mb-3">
+                <label asp-for="Employee.DepartmentId" class="mb-1">Department</label>
+                <select asp-for="Employee.DepartmentId" asp-items="@Model.Departments" class="form-select shadow-none">
+                    <option disabled selected>Select department</option>
+                </select>
+                <span asp-validation-for="Employee.DepartmentId" class="text-danger"></span>
+            </div>
+            <div class="col-6 mb-4">
+                <label asp-for="User.Password" class="mb-1">Password</label>
+                <input asp-for="User.Password" type="password" class="form-control shadow-none" />
+                <span asp-validation-for="User.Password" class="text-danger"></span>
+            </div>
+            <div class="col-6 mb-4">
+                <label asp-for="User.ConfirmPassword" class="mb-1">Confirm Password</label>
+                <input asp-for="User.ConfirmPassword" type="password" class="form-control shadow-none" />
+                <span asp-validation-for="User.ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <div class="col-12 d-flex justify-content-center align-items-center">
+                <button type="submit" class="btn btn-primary btn-lg w-50 shadow-none">
+                    <i class="bi bi-plus-circle-fill mx-1"></i>
+                    <span>Create Employee</span>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

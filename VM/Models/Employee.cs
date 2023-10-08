@@ -9,11 +9,13 @@ namespace VM.Models;
 
 public class Employee : IdentityUser
 {
-    [Required]
+    [Required(ErrorMessage = "Please insert a valid first name.")]
     public string FirstName { get; set; }
-    [Required]
+
+    [Required(ErrorMessage = "Please insert a valid last name.")]
     public string LastName { get; set; }
-    [Required]
+
+    [Required(ErrorMessage = "Please select a valid department.")]
     public int DepartmentId { get; set; }
     [ValidateNever]
     [ForeignKey("DepartmentId")]
