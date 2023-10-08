@@ -1,4 +1,5 @@
-﻿using VM.Environment;
+﻿using VM.Models;
+using VM.Environment;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using VM.Storage.Repository.IRepository;
@@ -14,6 +15,20 @@ public class EmployeeController : Controller
     public EmployeeController(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
+    }
+
+    [HttpGet]
+    public IActionResult GetAllEmployees()
+    {
+        try
+        {
+            IEnumerable<Employee> employees = _unitOfWork.Employee.GetAll(properties: "Department");
+            return Json(new { success = true, data = employees });
+        }
+        catch
+        {
+            return Json(new { success = false });
+        }
     }
 
     [HttpGet]
