@@ -72,7 +72,7 @@ function loadDataTable() {
                 "data": "id",
                 "render": function (data) {
                     return `
-                        <a href="" class="btn btn-warning btn-sm shadow-none mx-1">
+                        <a href="/Admin/Employee/Update/${data}" class="btn btn-warning btn-sm shadow-none mx-1">
                             <i class="bi bi-pencil-square mx-1"></i>
                         </a>
                         <a href="" class="btn btn-danger btn-sm shadow-none mx-1">
