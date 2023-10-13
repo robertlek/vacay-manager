@@ -84,6 +84,34 @@ public class EmployeeController : Controller
         return RedirectToAction("Index", "Employee");
     }
 
+    [HttpDelete]
+    public async Task<IActionResult> Delete(string? id)
+    {
+        if (id is null)
+        {
+            return NotFound();
+        }
+
+        Employee? employee = _unitOfWork.Employee.GetFirstOrDefault(employee => employee.Id == id);
+
+        if (employee is null)
+        {
+            return NotFound();
+        }
+
+        var user = await _userManager.FindByEmailAsync(employee.Email);
+
+        if (user is not null)
+        {
+            string role = _userManager.GetRolesAsync(user).GetAwaiter().GetResult().First();
+
+            await _userManager.RemoveFromRoleAsync(user, role);
+            await _userManager.DeleteAsync(user);
+        }
+
+        return Json(new { success = true });
+    }
+
     [HttpGet]
     public IActionResult GetAllEmployees()
     {

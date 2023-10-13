@@ -75,12 +75,48 @@ function loadDataTable() {
                         <a href="/Admin/Employee/Update/${data}" class="btn btn-warning btn-sm shadow-none mx-1">
                             <i class="bi bi-pencil-square mx-1"></i>
                         </a>
-                        <a href="" class="btn btn-danger btn-sm shadow-none mx-1">
+                        <button onclick=askForDeleteEmployee('${data}') class="btn btn-danger btn-sm shadow-none mx-1">
                             <i class="bi bi-trash mx-1"></i>
-                        </a>
+                        </button>
                     `;
                 }
             }
         ]
+    });
+}
+
+async function askForDeleteEmployee(id) {
+    const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "This employee will be permanently deleted!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#a93a3a",
+        cancelButtonColor: "#a5a5a5",
+        confirmButtonText: "Delete",
+        cancelButtonText: "Cancel",
+        customClass: {
+            confirmButton: "shadow-none",
+            cancelButton: "shadow-none"
+        }
+    });
+
+    if (result.isConfirmed) {
+        deleteEmployee(id);
+    }
+}
+
+function deleteEmployee(id) {
+    $.ajax({
+        url: `/Admin/Employee/Delete/${id}`,
+        type: "DELETE",
+        success: function (data) {
+            if (data.success) {
+                dataTable.ajax.reload();
+            }
+        },
+        error: function (error) {
+            console.error(error);
+        }
     });
 }
