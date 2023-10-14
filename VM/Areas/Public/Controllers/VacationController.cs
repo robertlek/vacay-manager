@@ -3,6 +3,7 @@ using VM.Environment;
 using Microsoft.AspNetCore.Mvc;
 using VM.Storage.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
+using VM.ViewModels;
 
 namespace VM.Areas.Public.Controllers;
 
@@ -54,7 +55,12 @@ public class VacationController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        var departments = _unitOfWork.Department.GetAll().OrderBy(department => department.Name);
-        return View(departments);
+        VacationIndexViewModel model = new()
+        {
+            Departments = _unitOfWork.Department.GetAll().OrderBy(department => department.Name),
+            Employees = _unitOfWork.Employee.GetAll()
+        };
+
+        return View(model);
     }
 }

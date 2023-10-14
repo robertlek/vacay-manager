@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Department>
+﻿@model VacationIndexViewModel
 
 @{
     ViewData["Title"] = "Departments";
@@ -22,7 +22,7 @@
     </div>
 
     <div class="row">
-        @foreach (var department in Model)
+        @foreach (var department in Model.Departments)
         {
             <div class="col-12 col-md-6 col-lg-3 mb-5">
                 <div class="card shadow">
@@ -37,7 +37,7 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <span>Employees</span>
-                            <span>0</span>
+                            <span>@Model.Employees.Where(employee => employee.DepartmentId == department.Id).Count()</span>
                         </div>
                         <div class="d-flex justify-content-between">
                             <span>Maximum Overlaps</span>
