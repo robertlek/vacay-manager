@@ -1,9 +1,10 @@
 ﻿using VM.Models;
+using VM.ViewModels;
 using VM.Environment;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using VM.Storage.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
-using VM.ViewModels;
 
 namespace VM.Areas.Public.Controllers;
 
@@ -60,6 +61,40 @@ public class VacationController : Controller
             Departments = _unitOfWork.Department.GetAll().OrderBy(department => department.Name),
             Employees = _unitOfWork.Employee.GetAll()
         };
+
+        return View(model);
+    }
+
+    [HttpGet]
+    public IActionResult New()
+    {
+        Employee? employee = null;
+
+        if (User.Identity != null)
+        {
+            var identity = (ClaimsIdentity)User.Identity;
+            var claim = identity.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (claim != null)
+            {
+                employee = _unitOfWork.Employee.GetFirstOrDefault(employee => employee.Id == claim.Value);
+            }
+        }
+
+        if (employee == null)
+        {
+            return StatusCode(403);
+        }
+
+        VacationInsertViewModel model = new()
+        {
+            Department = _unitOfWork.Department.Get(department => department.Id == employee.DepartmentId),
+            Employee = employee,
+            Vacation = new()
+        };
+
+        model.Vacation.FromDate = DateTime.Now;
+        model.Vacation.ToDate = DateTime.Now;
 
         return View(model);
     }

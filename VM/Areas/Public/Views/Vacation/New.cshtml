@@ -1,0 +1,69 @@
+﻿@model VacationInsertViewModel
+
+@{
+    ViewData["Title"] = "New Vacation";
+}
+
+<div class="mt-4 mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>
+            <i class="bi bi-people-fill mx-1"></i>
+            <span>New Vacation</span>
+        </h4>
+
+        <a asp-action="Index" class="btn btn-primary shadow-none">
+            <i class="bi bi-fast-forward-circle-fill mx-1"></i>
+            <span>Back</span>
+        </a>
+    </div>
+
+    <form method="post">
+        <div class="row">
+            <div class="col-6 mb-3">
+                <label asp-for="Employee.FirstName" class="mb-1">Your First Name</label>
+                <input asp-for="Employee.FirstName" type="text" class="form-control" disabled />
+            </div>
+            <div class="col-6 mb-3">
+                <label asp-for="Employee.LastName" class="mb-1">Your Last Name</label>
+                <input asp-for="Employee.LastName" type="text" class="form-control" disabled />
+            </div>
+            <div class="col-6 mb-3">
+                <label asp-for="Employee.Email" class="mb-1">Email Address</label>
+                <input asp-for="Employee.Email" type="text" class="form-control" disabled />
+            </div>
+            <div class="col-6 mb-3">
+                <label asp-for="Employee.PhoneNumber" class="mb-1">Phone Number</label>
+                <input asp-for="Employee.PhoneNumber" type="text" class="form-control" disabled />
+            </div>
+            <div class="col-6 mb-3">
+                <label asp-for="Department.Name" class="mb-1">Department</label>
+                <input asp-for="Department.Name" type="text" class="form-control" disabled />
+            </div>
+            <div class="col-6 mb-3">
+                <label asp-for="Department.Overlaps" class="mb-1">Department Maximum Overlaps</label>
+                <input asp-for="Department.Overlaps" type="text" class="form-control" disabled />
+            </div>
+            <div class="col-6 mb-3">
+                <label asp-for="Vacation.FromDate" class="mb-1">Vacation from date</label>
+                <input asp-for="Vacation.FromDate" type="date" class="form-control shadow-none" />
+                <span asp-validation-for="Vacation.FromDate" class="text-danger"></span>
+            </div>
+            <div class="col-6 mb-3">
+                <label asp-for="Vacation.ToDate" class="mb-1">Vacation to date</label>
+                <input asp-for="Vacation.ToDate" type="date" class="form-control shadow-none" />
+                <span asp-validation-for="Vacation.ToDate" class="text-danger"></span>
+            </div>
+
+            <div class="col-12 d-flex justify-content-center align-items-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg w-50 shadow-none">
+                    <i class="bi bi-plus-circle-fill mx-1"></i>
+                    <span>Submit Vacation</span>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
