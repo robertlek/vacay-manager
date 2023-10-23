@@ -13,10 +13,12 @@ public class UnitOfWork : IUnitOfWork
 
         Department = new DepartmentRepository(_context);
         Employee = new EmployeeRepository(_context);
+        Vacation = new VacationRepository(_context);
     }
 
     public IDepartmentRepository Department { get; private set; }
     public IEmployeeRepository Employee { get; private set; }
+    public IVacationRepository Vacation { get; private set; }
 
     public void Save()
     {

@@ -18,6 +18,9 @@
     </div>
 
     <form method="post">
+        <input type="hidden" asp-for="Department.Id" />
+        <input type="hidden" asp-for="Employee.Id" />
+
         <div class="row">
             <div class="col-6 mb-3">
                 <label asp-for="Employee.FirstName" class="mb-1">Your First Name</label>

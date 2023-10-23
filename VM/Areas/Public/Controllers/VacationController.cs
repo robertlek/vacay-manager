@@ -98,4 +98,26 @@ public class VacationController : Controller
 
         return View(model);
     }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult New(VacationInsertViewModel model)
+    {
+        model.Department = _unitOfWork.Department.Get(department => department.Id == model.Department.Id);
+        model.Employee = _unitOfWork.Employee.Get(employee => employee.Id == model.Employee.Id);
+
+        Vacation vacation = new()
+        {
+            EmployeeId = model.Employee.Id,
+            DepartmentId = model.Department.Id,
+            FromDate = model.Vacation.FromDate,
+            ToDate = model.Vacation.ToDate,
+            CreatedOn = DateTime.Now
+        };
+
+        _unitOfWork.Vacation.Add(vacation);
+        _unitOfWork.Save();
+
+        return RedirectToAction("Index");
+    }
 }
