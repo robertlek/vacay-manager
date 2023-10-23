@@ -59,7 +59,8 @@ public class VacationController : Controller
         VacationIndexViewModel model = new()
         {
             Departments = _unitOfWork.Department.GetAll().OrderBy(department => department.Name),
-            Employees = _unitOfWork.Employee.GetAll()
+            Employees = _unitOfWork.Employee.GetAll(),
+            Vacations = _unitOfWork.Vacation.GetAll(vacation => vacation.ToDate >= DateTime.Now)
         };
 
         return View(model);
