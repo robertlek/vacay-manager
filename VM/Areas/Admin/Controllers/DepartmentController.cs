@@ -1,8 +1,8 @@
 ﻿using VM.Models;
 using VM.Environment;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 using VM.Storage.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace VM.Areas.Admin.Controllers;
 
@@ -20,8 +20,7 @@ public class DepartmentController : Controller
     [HttpGet]
     public IActionResult Add()
     {
-        Department department = new();
-        return View(department);
+        return View(new Department());
     }
 
     [HttpPost]
