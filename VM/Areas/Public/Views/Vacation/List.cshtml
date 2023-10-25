@@ -1,0 +1,41 @@
+﻿@model Department
+
+@{
+    ViewData["Title"] = "Vacations";
+}
+
+<input type="hidden" id="department-id" value="@Model.Id" />
+
+<div class="mt-4 mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h4>
+                <i class="bi bi-calendar3 mx-1"></i>
+                <span>@Model.Name Vacations</span>
+            </h4>
+        </div>
+
+        <div>
+            <a asp-action="Index" class="btn btn-primary shadow-none">
+                <i class="bi bi-fast-forward-circle-fill mx-1"></i>
+                <span>Back</span>
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-borderless table-striped table-sm border" id="vacations-table">
+        <thead class="table-primary text-center">
+            <tr>
+                <th>From date</th>
+                <th>To date</th>
+                <th>Full name</th>
+                <th>Email address</th>
+                <th>Created on</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section Scripts {
+    <script src="~/js/vacation/list.js"></script>
+}

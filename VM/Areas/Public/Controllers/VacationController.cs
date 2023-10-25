@@ -24,7 +24,7 @@ public class VacationController : Controller
     {
         if (id == 0 || id is null)
         {
-            return NotFound();
+            return RedirectToAction("Index");
         }
 
         Department? department = _unitOfWork.Department.GetFirstOrDefault(department =>
@@ -54,6 +54,22 @@ public class VacationController : Controller
     }
 
     [HttpGet]
+    public IActionResult GetAllVacations(int departmentId)
+    {
+        try
+        {
+            var vacations = _unitOfWork.Vacation.GetAll(vacation =>
+                vacation.DepartmentId == departmentId, properties: "Employee");
+
+            return Json(new { success = true, data = vacations });
+        }
+        catch
+        {
+            return Json(new { success = false });
+        }
+    }
+
+    [HttpGet]
     public IActionResult Index()
     {
         VacationIndexViewModel model = new()
@@ -64,6 +80,24 @@ public class VacationController : Controller
         };
 
         return View(model);
+    }
+
+    [HttpGet]
+    public IActionResult List(int? id)
+    {
+        if (id == 0 || id is null)
+        {
+            return RedirectToAction("Index");
+        }
+
+        var department = _unitOfWork.Department.GetFirstOrDefault(department => department.Id == id);
+
+        if (department is null)
+        {
+            return RedirectToAction("Index");
+        }
+
+        return View(department);
     }
 
     [HttpGet]

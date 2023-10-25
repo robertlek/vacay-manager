@@ -42,7 +42,7 @@ public class Repository<T> : IRepository<T> where T : class
 
         if (filter is not null)
         {
-            query.Where(filter);
+            query = query.Where(filter);
         }
 
         if (properties is not null)
