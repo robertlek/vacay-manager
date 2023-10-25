@@ -64,7 +64,7 @@ public class DepartmentController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        IEnumerable<Department> departments = _unitOfWork.Department.GetAll().OrderBy(department => department.Name);
+        var departments = _unitOfWork.Department.GetAll().OrderBy(department => department.Name);
         return View(departments);
     }
 
@@ -73,7 +73,7 @@ public class DepartmentController : Controller
     {
         if (id == 0 || id == null)
         {
-            return NotFound();
+            return RedirectToAction("Index");
         }
 
         var department = _unitOfWork.Department.Get(department => department.Id == id);
