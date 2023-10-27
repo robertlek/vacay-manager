@@ -38,27 +38,25 @@ public class DepartmentController : Controller
         return View(department);
     }
 
-    [HttpGet]
+    [HttpDelete]
     public IActionResult Delete(int? id)
     {
         if (id == 0 || id == null)
         {
-            return NotFound();
+            return Json(new { success = false });
         }
 
         var department = _unitOfWork.Department.Get(department => department.Id == id);
-        return View(department);
-    }
 
-    [HttpPost]
-    [ActionName("Delete")]
-    [ValidateAntiForgeryToken]
-    public IActionResult DeleteConfirmation(Department department)
-    {
+        if (department is null)
+        {
+            return Json(new { success = false });
+        }
+
         _unitOfWork.Department.Remove(department);
         _unitOfWork.Save();
 
-        return RedirectToAction("Index");
+        return Json(new { success = true });
     }
 
     [HttpGet]

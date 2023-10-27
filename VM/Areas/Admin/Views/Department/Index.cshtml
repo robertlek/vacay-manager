@@ -42,14 +42,18 @@
                             <i class="bi bi-pencil-square mx-1"></i>
                             <span>Update</span>
                         </a>
-                        <a asp-action="Delete" asp-route-id="@department.Id"
-                            class="btn btn-danger btn-sm shadow-none mx-1">
+                        <button type="button" data-id="@department.Id"
+                            class="btn btn-danger btn-sm delete-button shadow-none mx-1">
                             <i class="bi bi-trash mx-1"></i>
                             <span>Delete</span>
-                        </a>
+                        </button>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+@section Scripts {
+    <script src="~/js/admin/department/index.js"></script>
+}
