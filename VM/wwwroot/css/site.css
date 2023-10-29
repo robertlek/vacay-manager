@@ -24,6 +24,15 @@ body {
     height: 400px;
 }
 
+.input-group:focus-within .input-group-text, .form-control:focus, .form-select:focus {
+    border: 1px solid #123758;
+    transition: 1s ease-in-out;
+}
+
+.small-icon {
+    font-size: 50%;
+}
+
 @media (min-width: 768px) {
     html {
         font-size: 16px;

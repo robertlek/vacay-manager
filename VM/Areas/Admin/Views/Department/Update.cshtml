@@ -24,12 +24,20 @@
     <form method="post">
         <div class="mb-3">
             <label asp-for="Name" class="mb-1">Department Name</label>
-            <input asp-for="Name" type="text" class="form-control shadow-none" />
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-building"></i></span>
+                <input asp-for="Name" type="text" class="form-control shadow-none" />
+                <span class="input-group-text text-danger"><i class="bi bi-asterisk small-icon"></i></span>
+            </div>
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="Overlaps" class="mb-1">Maximum Overlaps</label>
-            <input asp-for="Overlaps" type="number" class="form-control shadow-none" />
+            <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-arrow-down-up"></i></span>
+                <input asp-for="Overlaps" type="number" class="form-control shadow-none" />
+                <span class="input-group-text text-danger"><i class="bi bi-asterisk small-icon"></i></span>
+            </div>
             <span asp-validation-for="Overlaps" class="text-danger"></span>
         </div>
         <div class="d-flex justify-content-center">
