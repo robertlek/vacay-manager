@@ -150,6 +150,13 @@ public class VacationController : Controller
             CreatedOn = DateTime.Now
         };
 
+        model.Vacation = vacation;
+
+        if (vacation.FromDate > vacation.ToDate)
+        {
+            return View(model);
+        }
+
         _unitOfWork.Vacation.Add(vacation);
         _unitOfWork.Save();
 
