@@ -1,4 +1,5 @@
 ﻿using VM.Models;
+using VM.Library;
 using VM.ViewModels;
 using VM.Environment;
 using System.Security.Claims;
@@ -10,7 +11,7 @@ namespace VM.Areas.Public.Controllers;
 
 [Area("Public")]
 [Authorize(Roles = Roles.Admin + "," + Roles.Employee)]
-public class VacationController : Controller
+public class VacationController : BaseController
 {
     private readonly IUnitOfWork _unitOfWork;
 

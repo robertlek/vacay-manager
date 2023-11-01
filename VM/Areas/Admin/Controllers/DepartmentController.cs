@@ -1,4 +1,5 @@
 ﻿using VM.Models;
+using VM.Library;
 using VM.Environment;
 using Microsoft.AspNetCore.Mvc;
 using VM.Storage.Repository.IRepository;
@@ -8,7 +9,7 @@ namespace VM.Areas.Admin.Controllers;
 
 [Area("Admin")]
 [Authorize(Roles = Roles.Admin)]
-public class DepartmentController : Controller
+public class DepartmentController : BaseController
 {
     private readonly IUnitOfWork _unitOfWork;
 

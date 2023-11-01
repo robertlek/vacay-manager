@@ -1,4 +1,5 @@
 ﻿using VM.Models;
+using VM.Library;
 using VM.ViewModels;
 using VM.Environment;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ namespace VM.Areas.Admin.Controllers;
 
 [Area("Admin")]
 [Authorize(Roles = Roles.Admin)]
-public class EmployeeController : Controller
+public class EmployeeController : BaseController
 {
     private readonly RoleManager<IdentityRole> _roleManager;
     private readonly UserManager<IdentityUser> _userManager;
