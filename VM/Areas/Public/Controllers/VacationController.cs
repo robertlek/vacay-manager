@@ -121,6 +121,11 @@ public class VacationController : Controller
             return StatusCode(403);
         }
 
+        if (_unitOfWork.Employee.HasActiveVacation(employee))
+        {
+            return RedirectToAction("Index");
+        }
+
         VacationInsertViewModel model = new()
         {
             Department = _unitOfWork.Department.Get(department => department.Id == employee.DepartmentId),
@@ -140,6 +145,11 @@ public class VacationController : Controller
     {
         model.Department = _unitOfWork.Department.Get(department => department.Id == model.Department.Id);
         model.Employee = _unitOfWork.Employee.Get(employee => employee.Id == model.Employee.Id);
+
+        if (_unitOfWork.Employee.HasActiveVacation(model.Employee))
+        {
+            return RedirectToAction("Index");
+        }
 
         Vacation vacation = new()
         {
