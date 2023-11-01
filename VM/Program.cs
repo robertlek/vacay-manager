@@ -25,11 +25,9 @@ var app = builder.Build();
 
 void SeedDatabase()
 {
-    using (var scoped = app.Services.CreateScope())
-    {
-        var dbInitializer = scoped.ServiceProvider.GetRequiredService<IDbInitializer>();
-        dbInitializer.Initialize();
-    }
+    using var scoped = app.Services.CreateScope();
+    var dbInitializer = scoped.ServiceProvider.GetRequiredService<IDbInitializer>();
+    dbInitializer.Initialize();
 }
 
 // Configure the HTTP request pipeline.
