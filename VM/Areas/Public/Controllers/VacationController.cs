@@ -152,7 +152,7 @@ public class VacationController : Controller
 
         model.Vacation = vacation;
 
-        if (vacation.FromDate > vacation.ToDate)
+        if (vacation.FromDate >= vacation.ToDate)
         {
             return View(model);
         }

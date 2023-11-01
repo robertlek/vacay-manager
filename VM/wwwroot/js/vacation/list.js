@@ -31,6 +31,10 @@ function loadDataTable(departmentId) {
             {
                 targets: 4,
                 className: "dt-head-center dt-body-center"
+            },
+            {
+                targets: 5,
+                className: "dt-head-center dt-body-center"
             }
         ],
         "columns": [
@@ -61,6 +65,12 @@ function loadDataTable(departmentId) {
                 }
             },
             {
+                "render": (_data, _type, row) => {
+                    var date = calculateDaysBetweenDates(row.fromDate, row.toDate);
+                    return `${date}`
+                }
+            },
+            {
                 "data": "employee",
                 "render": (data) => {
                     return `${data.firstName} ${data.lastName}`;
@@ -84,4 +94,14 @@ function loadDataTable(departmentId) {
             }
         ]
     });
+}
+
+function calculateDaysBetweenDates(startDate, endDate) {
+    startDate = new Date(startDate);
+    endDate = new Date(endDate);
+
+    var difference = endDate - startDate;
+    difference = difference / (1000 * 60 * 60 * 24);
+
+    return Math.floor(difference);
 }
