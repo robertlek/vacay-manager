@@ -25,6 +25,7 @@ public class VacationController : BaseController
     {
         if (id == 0 || id is null)
         {
+            SendErrorMessage("The department is invalid.");
             return RedirectToAction("Index");
         }
 
@@ -33,7 +34,8 @@ public class VacationController : BaseController
 
         if (department is null)
         {
-            return NotFound();
+            SendErrorMessage("The department is invalid.");
+            return RedirectToAction("Index");
         }
 
         return View(department);
@@ -88,6 +90,7 @@ public class VacationController : BaseController
     {
         if (id == 0 || id is null)
         {
+            SendErrorMessage("The department is invalid.");
             return RedirectToAction("Index");
         }
 
@@ -95,6 +98,7 @@ public class VacationController : BaseController
 
         if (department is null)
         {
+            SendErrorMessage("The department is invalid.");
             return RedirectToAction("Index");
         }
 
@@ -119,11 +123,13 @@ public class VacationController : BaseController
 
         if (employee == null)
         {
-            return StatusCode(403);
+            SendErrorMessage("The employee is invalid.");
+            return RedirectToAction("Index");
         }
 
         if (_unitOfWork.Employee.HasActiveVacation(employee))
         {
+            SendWarningMessage("You already have an active vacation.");
             return RedirectToAction("Index");
         }
 
@@ -149,6 +155,7 @@ public class VacationController : BaseController
 
         if (_unitOfWork.Employee.HasActiveVacation(model.Employee))
         {
+            SendWarningMessage("You already have an active vacation.");
             return RedirectToAction("Index");
         }
 
@@ -165,12 +172,14 @@ public class VacationController : BaseController
 
         if (vacation.FromDate >= vacation.ToDate)
         {
+            SendErrorMessage("The vacation dates are invalid.");
             return View(model);
         }
 
         _unitOfWork.Vacation.Add(vacation);
         _unitOfWork.Save();
 
+        SendSuccessMessage("Your vacation has been submitted.");
         return RedirectToAction("Index");
     }
 }

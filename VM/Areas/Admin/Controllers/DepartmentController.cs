@@ -33,9 +33,11 @@ public class DepartmentController : BaseController
             _unitOfWork.Department.Add(department);
             _unitOfWork.Save();
 
+            SendSuccessMessage("The department was created.");
             return RedirectToAction("Index");
         }
 
+        SendErrorMessage("You have provided invalid data.");
         return View(department);
     }
 
@@ -72,6 +74,7 @@ public class DepartmentController : BaseController
     {
         if (id == 0 || id == null)
         {
+            SendErrorMessage("The department is invalid.");
             return RedirectToAction("Index");
         }
 
@@ -88,9 +91,11 @@ public class DepartmentController : BaseController
             _unitOfWork.Department.Update(department);
             _unitOfWork.Save();
 
+            SendSuccessMessage("The department has been updated.");
             return RedirectToAction("Index");
         }
 
+        SendErrorMessage("You have provided invalid data.");
         return View(department);
     }
 }

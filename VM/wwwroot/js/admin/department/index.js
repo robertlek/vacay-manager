@@ -35,11 +35,26 @@ function deleteDepartment(id) {
         "method": "DELETE",
         "success": (data) => {
             if (data.success) {
-                window.location.reload();
+                deleteDepartmentConfirmation();
             }
         },
         "error": (error) => {
             console.error(error);
         }
     })
+}
+
+async function deleteDepartmentConfirmation() {
+    const result = await Swal.fire({
+        "title": "Department deleted.",
+        "text": "The department has been successfully deleted.",
+        "icon": "success",
+        "confirmButtonText": "Back",
+        "confirmButtonColor": "#a5a5a5",
+        "customClass": {
+            "confirmButton": "shadow-none"
+        }
+    });
+
+    window.location.reload();
 }

@@ -113,10 +113,24 @@ function deleteEmployee(id) {
         success: function (data) {
             if (data.success) {
                 dataTable.ajax.reload();
+                deleteEmployeeConfirmation();
             }
         },
         error: function (error) {
             console.error(error);
+        }
+    });
+}
+
+function deleteEmployeeConfirmation() {
+    Swal.fire({
+        "title": "Employee deleted.",
+        "text": "The employee has been successfully deleted.",
+        "icon": "success",
+        "confirmButtonText": "Back",
+        "confirmButtonColor": "#a5a5a5",
+        "customClass": {
+            "confirmButton": "shadow-none"
         }
     });
 }

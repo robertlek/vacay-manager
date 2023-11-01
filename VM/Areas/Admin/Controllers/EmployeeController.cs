@@ -58,6 +58,7 @@ public class EmployeeController : BaseController
     {
         if (!ModelState.IsValid)
         {
+            SendErrorMessage("You have provided invalid data.");
             return View(model);
         }
 
@@ -65,6 +66,7 @@ public class EmployeeController : BaseController
 
         if (user is not null)
         {
+            SendErrorMessage("This email address is not available.");
             return View(model);
         }
 
@@ -82,6 +84,7 @@ public class EmployeeController : BaseController
         user = _unitOfWork.Employee.Get(user => user.UserName.Equals(model.User.Email));
         _userManager.AddToRoleAsync(user, model.Role).GetAwaiter().GetResult();
 
+        SendSuccessMessage("The employee has been created.");
         return RedirectToAction("Index", "Employee");
     }
 
@@ -138,14 +141,16 @@ public class EmployeeController : BaseController
     {
         if (id is null)
         {
-            return NotFound();
+            SendErrorMessage("This employee is invalid.");
+            return RedirectToAction("Index", "Employee");
         }
 
         Employee? employee = _unitOfWork.Employee.GetFirstOrDefault(employee => employee.Id == id);
 
         if (employee is null)
         {
-            return NotFound();
+            SendErrorMessage("This employee is invalid.");
+            return RedirectToAction("Index", "Employee");
         }
 
         IdentityUser user = await _userManager.FindByEmailAsync(employee.Email);
@@ -192,6 +197,7 @@ public class EmployeeController : BaseController
     {
         if (!ModelState.IsValid)
         {
+            SendErrorMessage("You have provided invalid data.");
             return View(model);
         }
 
@@ -218,6 +224,7 @@ public class EmployeeController : BaseController
             _unitOfWork.Save();
         }
 
+        SendSuccessMessage("The employee has been updated.");
         return RedirectToAction("Index", "Employee");
     }
 }
