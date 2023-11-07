@@ -1,4 +1,8 @@
-﻿@using VM.Environment
+﻿@using Microsoft.AspNetCore.Identity;
+@using VM.Environment
+
+@inject UserManager<IdentityUser> UserManager
+@inject VM.Storage.Repository.IRepository.IUnitOfWork _unitOfWork
 
 <!DOCTYPE html>
 
@@ -65,6 +69,25 @@
                                         <span>Departments</span>
                                     </a>
                                 </li>
+                            }
+
+                            @if (User.IsInRole(Roles.Admin) || User.IsInRole(Roles.Employee)) {
+                                Employee employee = _unitOfWork.Employee.Get(user =>
+                                    user.UserName.Equals(UserManager.GetUserName(User)));
+                                bool hasActiveVacation = _unitOfWork.Employee.HasActiveVacation(employee);
+
+                                if (hasActiveVacation)
+                                {
+                                    Vacation vacation = _unitOfWork.Vacation.GetActiveVacation(employee);
+
+                                    <li class="nav-item">
+                                        <a asp-area="Public" asp-controller="Vacation" asp-action="MyVacation"
+                                            asp-route-id="@vacation.Id" class="nav-link text-white">
+                                            <i class="bi bi-calendar3 mx-1"></i>
+                                            <span>My Vacation</span>
+                                        </a>
+                                    </li>
+                                }
                             }
                         </ul>
 

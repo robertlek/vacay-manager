@@ -106,6 +106,20 @@ public class VacationController : BaseController
     }
 
     [HttpGet]
+    public IActionResult MyVacation(int? id)
+    {
+        if (id is null || id == 0)
+        {
+            SendErrorMessage("This vacation is invalid.");
+            return RedirectToAction("Index");
+        }
+
+        Vacation vacation = _unitOfWork.Vacation.Get(vacation => vacation.Id == id);
+
+        return View(vacation);
+    }
+
+    [HttpGet]
     public IActionResult New()
     {
         Employee? employee = null;

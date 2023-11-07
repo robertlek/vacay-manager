@@ -12,4 +12,13 @@ public class VacationRepository : Repository<Vacation>, IVacationRepository
     {
         _context = context;
     }
+
+    public Vacation GetActiveVacation(Employee employee)
+    {
+        Vacation vacation = _context.Vacations.First(vacation =>
+            vacation.EmployeeId == employee.Id &&
+            vacation.ToDate >= DateTime.Now);
+
+        return vacation;
+    }
 }
