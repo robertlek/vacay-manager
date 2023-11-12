@@ -33,7 +33,19 @@
                             <b>Vacation days:</b> @((Model.ToDate - Model.FromDate).Days)
                         </div>
                         <div>
-                            <b>Vacation days left:</b> @((Model.ToDate - DateTime.Now).Days)
+                            @{
+                                int vacationDaysLeft;
+
+                                if (Model.FromDate > DateTime.Now)
+                                {
+                                    vacationDaysLeft = (Model.ToDate - Model.FromDate).Days;
+                                }
+                                else
+                                {
+                                    vacationDaysLeft = (Model.ToDate - DateTime.Now).Days;
+                                }
+                            }
+                            <b>Vacation days left:</b> @vacationDaysLeft
                         </div>
                     </div>
                 </div>
