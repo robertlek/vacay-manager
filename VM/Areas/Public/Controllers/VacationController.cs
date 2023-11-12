@@ -20,6 +20,21 @@ public class VacationController : BaseController
         _unitOfWork = unitOfWork;
     }
 
+    [HttpDelete]
+    public JsonResult CancelVacation(int? id)
+    {
+        if (id == 0 || id is null)
+        {
+            return Json(new { success = false, message = "This vacation is invalid." });
+        }
+
+        Vacation vacation = _unitOfWork.Vacation.Get(vacation => vacation.Id == id);
+        _unitOfWork.Vacation.Remove(vacation);
+        _unitOfWork.Save();
+
+        return Json(new { success = true });
+    }
+
     [HttpGet]
     public IActionResult Employees(int? id)
     {

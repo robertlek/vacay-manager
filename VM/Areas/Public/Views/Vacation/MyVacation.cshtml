@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="mt-4">
-                <button class="btn btn-danger shadow-none w-75">
+                <button id="cancel-button" data-id="@Model.Id" class="btn btn-danger shadow-none w-75">
                     <i class="bi bi-trash-fill mx-1"></i>
                     <span>Cancel Vacation</span>
                 </button>
@@ -53,3 +53,7 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/vacation/myvacation.js"></script>
+}
