@@ -11,41 +11,46 @@
 <partial name="_StatusMessage" for="StatusMessage" />
 
 <form id="profile-form" method="post">
-    <div class="row">   
-        <div class="col-6">
-            <div class="form-floating mb-2">
-                <input asp-for="Username" class="form-control shadow-none" disabled />
-                <label asp-for="Username" class="form-label"></label>
+    <div class="row">
+        <div class="col-8 row">
+            <div class="col-6">
+                <div class="form-floating mb-2">
+                    <input asp-for="Username" class="form-control shadow-none" disabled />
+                    <label asp-for="Username" class="form-label"></label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input asp-for="Input.Department" class="form-control shadow-none" disabled />
+                    <label asp-for="Input.Department" class="form-label"></label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.PhoneNumber" class="form-control shadow-none" />
+                    <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-floating mb-2">
-                <input asp-for="Input.Department" class="form-control shadow-none" disabled />
-                <label asp-for="Input.Department" class="form-label"></label>
+            <div class="col-6">
+                <div class="form-floating mb-2">
+                    <input asp-for="Input.FirstName" class="form-control shadow-none" disabled />
+                    <label asp-for="Input.FirstName" class="form-label"></label>
+                </div>
+                <div class="form-floating mb-2">
+                    <input asp-for="Input.LastName" class="form-control shadow-none" disabled />
+                    <label asp-for="Input.LastName" class="form-label"></label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.EmployedOn" class="form-control shadow-none" disabled />
+                    <label asp-for="Input.EmployedOn" class="form-label"></label>
+                </div>
             </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.PhoneNumber" class="form-control shadow-none" />
-                <label asp-for="Input.PhoneNumber" class="form-label"></label>
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            <div class="col-12">
+                <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">
+                    <i class="bi bi-floppy2 mx-2"></i>
+                    <span>Update Phone Number</span>
+                </button>
             </div>
         </div>
-        <div class="col-6">
-            <div class="form-floating mb-2">
-                <input asp-for="Input.FirstName" class="form-control shadow-none" disabled />
-                <label asp-for="Input.FirstName" class="form-label"></label>
-            </div>
-            <div class="form-floating mb-2">
-                <input asp-for="Input.LastName" class="form-control shadow-none" disabled />
-                <label asp-for="Input.LastName" class="form-label"></label>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.EmployedOn" class="form-control shadow-none" disabled />
-                <label asp-for="Input.EmployedOn" class="form-label"></label>
-            </div>
-        </div>
-        <div class="col-12">
-            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">
-                <i class="bi bi-floppy2 mx-2"></i>
-                <span>Update Phone Number</span>
-            </button>
+        <div class="col-4 d-flex justify-content-center">
+            <img src="~/img/profile-image.svg" height="300" />
         </div>
     </div>
 </form>

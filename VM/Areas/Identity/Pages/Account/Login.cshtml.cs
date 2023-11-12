@@ -31,15 +31,14 @@ public class LoginModel : PageModel
 
     public class InputModel
     {
-        [Required]
+        [Required(ErrorMessage = "Please insert a valid email address.")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please insert a valid password.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        /// </summary>
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
