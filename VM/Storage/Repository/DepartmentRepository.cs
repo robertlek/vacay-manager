@@ -12,4 +12,16 @@ public class DepartmentRepository : Repository<Department>, IDepartmentRepositor
     {
         _context = context;
     }
+
+    public int GetActiveVacationsCount(int departmentId)
+    {
+        Department? department = _context.Departments.FirstOrDefault(department =>
+            department.Id == departmentId) ?? throw new Exception("The target department is invalid!");
+
+        var vacations = _context.Vacations.Where(vacation =>
+            vacation.DepartmentId == department.Id &&
+            vacation.ToDate >= DateTime.Now);
+
+        return vacations.Count();
+    }
 }

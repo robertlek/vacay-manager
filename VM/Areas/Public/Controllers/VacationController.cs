@@ -163,9 +163,17 @@ public class VacationController : BaseController
             return RedirectToAction("Index");
         }
 
+        Department department = _unitOfWork.Department.Get(department => department.Id == employee.DepartmentId);
+
+        if (_unitOfWork.Department.GetActiveVacationsCount(department.Id) >= department.Overlaps)
+        {
+            SendErrorMessage("The department's vacations overlaps limit has been reached.");
+            return RedirectToAction("Index");
+        }
+
         VacationInsertViewModel model = new()
         {
-            Department = _unitOfWork.Department.Get(department => department.Id == employee.DepartmentId),
+            Department = department,
             Employee = employee,
             Vacation = new()
         };
