@@ -1,5 +1,55 @@
 ﻿@model Vacation
 
-<h1>My vacation</h1>
+<div class="mt-4 mb-4">
+    <h3>The details of my current vacation:</h3>
 
-@Model.Id
+    <div class="row">
+        <div class="col-7">
+            <div class="card w-75 mt-4">
+                <div class="card-header bg-primary text-center text-white">
+                    From <b>@Model.FromDate.ToShortDateString()</b> to <b>@Model.ToDate.ToShortDateString()</b>
+                </div>
+                <div class="card-body row">
+                    <div class="col-6">
+                        <img src="~/img/vacation-details-image.svg" height="200" alt="Details" />
+                    </div>
+                    <div class="offset-1 col-5">
+                        <div>
+                            <b>First Name:</b> @Model.Employee.FirstName
+                        </div>
+                        <div>
+                            <b>Last Name:</b> @Model.Employee.LastName
+                        </div>
+                        <div>
+                            <b>Phone:</b> @Model.Employee.PhoneNumber
+                        </div>
+                        <div>
+                            <b>Department:</b> @Model.Department.Name
+                        </div>
+                        <div>
+                            <b>Department Overlaps:</b> @Model.Department.Overlaps
+                        </div>
+                        <div>
+                            <b>Vacation days:</b> @((Model.ToDate - Model.FromDate).Days)
+                        </div>
+                        <div>
+                            <b>Vacation days left:</b> @((Model.ToDate - DateTime.Now).Days)
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-center text-muted small">
+                    Vacation submitted on @Model.CreatedOn.ToShortDateString()
+                </div>
+            </div>
+            <div class="mt-4">
+                <button class="btn btn-danger shadow-none w-75">
+                    <i class="bi bi-trash-fill mx-1"></i>
+                    <span>Cancel Vacation</span>
+                </button>
+            </div>
+        </div>
+        <div class="col-5 d-flex justify-content-center">
+            <img src="~/img/vacation-image.svg" width="500" alt="Vacation" />
+        </div>
+    </div>
+</div>

@@ -114,7 +114,8 @@ public class VacationController : BaseController
             return RedirectToAction("Index");
         }
 
-        Vacation vacation = _unitOfWork.Vacation.Get(vacation => vacation.Id == id);
+        Vacation vacation = _unitOfWork.Vacation.Get(vacation => vacation.Id == id,
+            properties: "Employee,Department");
 
         return View(vacation);
     }
