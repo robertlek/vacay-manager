@@ -21,4 +21,9 @@ public class VacationRepository : Repository<Vacation>, IVacationRepository
 
         return vacation;
     }
+
+    public IEnumerable<Vacation> GetAll()
+    {
+        return _context.Vacations;
+    }
 }
