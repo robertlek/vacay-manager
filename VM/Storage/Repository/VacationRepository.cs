@@ -26,4 +26,9 @@ public class VacationRepository : Repository<Vacation>, IVacationRepository
     {
         return _context.Vacations;
     }
+
+    public int GetVacationsCountByMonth(int month)
+    {
+        return GetAll().Where(vacation => vacation.FromDate.Month == month).Count();
+    }
 }
