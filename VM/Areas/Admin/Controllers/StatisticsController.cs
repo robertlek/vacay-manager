@@ -1,9 +1,9 @@
 ﻿using VM.Library;
 using VM.Environment;
+using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using VM.Storage.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
-using System.Globalization;
 
 namespace VM.Areas.Admin.Controllers;
 
@@ -38,6 +38,26 @@ public class StatisticsController : BaseController
             };
 
             data.Add(dataForMonth);
+        }
+
+        return Json(data);
+    }
+
+    [HttpGet]
+    [Route("api/get-employees-data")]
+    public JsonResult GetEmployeesData()
+    {
+        List<object> data = new();
+
+        for (int i = 2020; i <= 2025; i++)
+        {
+            object dataForYear = new
+            {
+                Year = i,
+                Count = _unitOfWork.Employee.GetEmploymentRateForYear(i)
+            };
+
+            data.Add(dataForYear);
         }
 
         return Json(data);

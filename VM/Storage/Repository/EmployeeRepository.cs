@@ -13,6 +13,16 @@ public class EmployeeRepository : Repository<Employee>, IEmployeeRepository
         _context = context;
     }
 
+    private IEnumerable<Employee> GetAll()
+    {
+        return _context.Employees;
+    }
+
+    public int GetEmploymentRateForYear(int year)
+    {
+        return GetAll().Where(employee => employee.EmployedOn.Year == year).Count();
+    }
+
     public bool HasActiveVacation(Employee employee)
     {
         var vacations = _context.Vacations.Where(vacation => vacation.EmployeeId == employee.Id);
