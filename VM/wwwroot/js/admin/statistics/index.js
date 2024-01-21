@@ -1,5 +1,31 @@
+const select = $("#select-list");
+const vacationsChart = $("#vacations-chart");
+const employeesChart = $("#employees-chart");
+
 (async function () {
-    const data = await fetchVacationsData();
+    $(vacationsChart).hide();
+    $(employeesChart).hide();
+
+    $(select).on("change", () => {
+        const option = $(select).find(":selected").val();
+
+        switch (option) {
+            case "0":
+                vacationsChart.show();
+                employeesChart.hide();
+                break;
+            case "1":
+                employeesChart.show();
+                vacationsChart.hide();
+                break;
+            default:
+                break;
+        }
+    });
+
+    $(select).trigger("change");
+
+    const vacationsData = await fetchVacationsData();
     const employeesData = await fetchEmployeesData();
 
     new Chart(
@@ -7,11 +33,11 @@
         {
             type: "bar",
             data: {
-                labels: data.map(row => row.month),
+                labels: vacationsData.map(row => row.month),
                 datasets: [
                     {
                         label: "Vacations planned for 2024",
-                        data: data.map(row => row.count)
+                        data: vacationsData.map(row => row.count)
                     }
                 ]
             }
