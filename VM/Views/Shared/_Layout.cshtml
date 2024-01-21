@@ -57,6 +57,10 @@
                                             <i class="bi bi-people-fill mx-1"></i>
                                             <span>Employees</span>
                                         </a>
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Statistics" asp-action="Index">
+                                            <i class="bi bi-bar-chart-fill mx-1"></i>
+                                            <span>Statistics</span>
+                                        </a>
                                     </div>
                                 </li>
                             }
@@ -107,7 +111,7 @@
         <footer class="bg-primary footer shadow">
             <div class="container text-center text-white">
                 <i class="bi bi-c-circle mx-1"></i>
-                <span>2023 - Vacay Manager - </span>
+                <span>2023-2024 - Vacay Manager - </span>
 
                 <a href="https://github.com/robertlek">
                     <i class="bi bi-github text-white mx-1"></i>
@@ -119,6 +123,7 @@
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
         @await RenderSectionAsync("Scripts", required: false)
     </body>
 </html>
